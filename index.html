@@ -13,7 +13,6 @@
       --text:#2b2b2b;
       --muted:#777;
     }
-    /* Фон с градиентом */
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;
@@ -25,17 +24,20 @@
     .navbar{
       position:fixed; top:0; left:0; right:0;
       backdrop-filter:blur(10px);
-      background:rgba(255,255,255,0.85);
+      background:rgba(255,255,255,0.9);
       box-shadow:0 8px 20px rgba(0,0,0,0.08);
-      display:flex; align-items:center; justify-content:center;
-      gap:8px; padding:10px 16px; z-index:1000;
+      z-index:1000;
+      /* важно: относительное позиционирование — якорь для выпадающего меню */
+      position:fixed;
     }
     .nav-inner{
-      width:100%; max-width:980px; display:flex; align-items:center; gap:12px;
+      max-width:980px; margin:0 auto;
+      display:flex; align-items:center; gap:12px;
+      padding:10px 16px;
+      position:relative;
     }
-    .brand{
-      font-weight:700; color:var(--primary); margin-right:auto; padding:8px 10px;
-    }
+    .brand{ font-weight:700; color:var(--primary); margin-right:auto; }
+
     .tabs{
       display:flex; gap:8px;
     }
@@ -50,82 +52,65 @@
       box-shadow:0 6px 14px rgba(124,77,255,.25);
     }
 
-    /* Контейнер и карточка */
-    .wrap{
-      margin-top:84px; padding:24px;
-      display:flex; justify-content:center;
+    /* Кнопка гамбургер */
+    .hamburger{
+      display:none; font-size:24px; background:none; border:none;
+      cursor:pointer; color:var(--primary);
     }
+
+    /* Контент */
+    .wrap{ margin-top:84px; padding:24px; display:flex; justify-content:center; }
     .card{
       width:100%; max-width:900px; background:var(--card);
       border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.08);
-      padding:28px; position:relative; overflow:hidden;
+      padding:28px; position:relative;
     }
-    /* Декоративный блик */
-    .card::before{
-      content:""; position:absolute; right:-60px; top:-60px;
-      width:220px; height:220px; border-radius:50%;
-      background:radial-gradient(circle at center, #e7dbff 0%, transparent 60%);
-      filter:blur(10px); opacity:.7; pointer-events:none;
-    }
-
-    /* Контент вкладок */
     .tab-content{ display:none; opacity:0; transform:translateY(10px); }
     .tab-content.show{ display:block; animation:fadeIn .35s ease forwards; }
     @keyframes fadeIn{ to{ opacity:1; transform:translateY(0); } }
 
-    /* Заголовки и текст */
-    h1{ margin:0 0 8px; font-size:28px; color:var(--primary); text-align:center; }
-    h2{ margin:0 0 14px; font-size:22px; color:#5b2ca3; text-align:center; }
+    h1{ text-align:center; font-size:28px; color:var(--primary); margin:0 0 8px; }
+    h2{ text-align:center; font-size:22px; color:#5b2ca3; margin:0 0 14px; }
     .date{ text-align:center; font-weight:600; margin:10px 0 16px; }
     .text{ text-align:center; line-height:1.65; max-width:780px; margin:0 auto; }
 
-    /* Изображения */
-    .hero-img{
-      display:block; margin:16px auto 0;
-      border-radius:14px; box-shadow:0 10px 24px rgba(0,0,0,.12);
-      width:100%; max-width:760px;
-    }
     .hero-img.small{
-      max-width:60%; /* уменьшенное фото на первой странице */
-      border-radius:12px;
-      box-shadow:0 8px 18px rgba(0,0,0,.10);
+      display:block; margin:16px auto 0;
+      border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.10);
+      max-width:60%;
     }
-    .place-photos{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:14px;
-    }
-    .place-photos img{ width:100%; border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
 
-    /* Кнопки карт */
-    .map-buttons{
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px;
-    }
+    .map-buttons{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px; }
     .map-link{
-      display:inline-flex; align-items:center; gap:8px;
       text-decoration:none; padding:10px 14px; border-radius:12px;
       background:#efecff; color:#3a2b55; transition:all .2s ease;
     }
-    .map-link:hover{ background:var(--secondary); color:#fff; box-shadow:0 8px 18px rgba(179,136,255,.25); }
+    .map-link:hover{ background:var(--secondary); color:#fff; }
 
-    /* Формы */
-    form input, form select, form button{ font:inherit; }
     .form-row{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-    .input, .select{
+    .input,.select{
       padding:10px 12px; border-radius:10px; border:1px solid #ddd; min-width:240px;
-      background:#fff; transition:border-color .2s ease, box-shadow .2s ease;
+      background:#fff;
     }
-    .input:focus, .select:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(124,77,255,.12); }
     .btn{
       padding:10px 16px; border-radius:10px; border:none; cursor:pointer;
-      background:var(--primary); color:#fff; transition:transform .15s ease, box-shadow .2s ease;
-      box-shadow:0 8px 18px rgba(124,77,255,.25);
+      background:var(--primary); color:#fff;
     }
-    .btn:hover{ transform:translateY(-1px); }
     .note{ text-align:center; color:var(--muted); margin-top:8px; }
 
-    /* Адаптивность */
+    /* Мобильный режим */
     @media (max-width:640px){
-      .brand{ display:none; }
-      .card{ padding:20px; }
+      .hamburger{ display:block; margin-left:auto; }
+      .tabs{
+        position:absolute; top:100%; left:0; right:0;
+        flex-direction:column; background:#fff;
+        box-shadow:0 8px 20px rgba(0,0,0,.15);
+        border-radius:0 0 12px 12px;
+        max-height:0; overflow:hidden;
+        transition:max-height 0.3s ease;
+      }
+      .tabs.open{ max-height:320px; }
+      .tab-btn{ width:100%; text-align:left; padding:12px 16px; }
       .hero-img.small{ max-width:80%; }
     }
   </style>
@@ -135,7 +120,8 @@
   <nav class="navbar" aria-label="Навигация">
     <div class="nav-inner">
       <div class="brand">Владислав & Ирина</div>
-      <div class="tabs" id="tabs">
+      <button class="hamburger" id="hamburger" aria-label="Открыть меню">&#9776;</button>
+      <div class="tabs" id="tabs" aria-label="Вкладки сайта">
         <button class="tab-btn active" data-tab="invite">Приглашение</button>
         <button class="tab-btn" data-tab="contacts">Контакты</button>
         <button class="tab-btn" data-tab="schedule">Программа</button>
@@ -148,7 +134,6 @@
   <!-- Контент -->
   <main class="wrap">
     <section class="card" id="card">
-
       <!-- Приглашение -->
       <div id="invite" class="tab-content show" role="region" aria-label="Приглашение">
         <h1>Приглашение на свадьбу 💍</h1>
@@ -158,7 +143,6 @@
           Дорогие друзья! Мы с радостью приглашаем вас на нашу свадьбу в шатре «Орион» в городе Владивосток.
           Этот день станет началом новой главы нашей жизни, и мы будем счастливы разделить его с вами!
         </p>
-        <!-- Фото после текста и уменьшенное -->
         <img class="hero-img small" src="img/fRXqtpqwDT3nsj8i3vhcV.jpg" alt="Фото пары"/>
       </div>
 
@@ -222,15 +206,15 @@
   </main>
 
   <script>
-    // Ключ для локального флага ответа (общий для всех вкладок/окон в одном домене)
+    // Общий флаг для всех вкладок
     const ANSWER_KEY = "Опрос по согласию_answered";
 
-    // Инициализация флага: если отсутствует — считаем, что ответа нет.
+    // Инициализация флага (если отсутствует)
     if (localStorage.getItem(ANSWER_KEY) === null) {
       localStorage.setItem(ANSWER_KEY, "false");
     }
 
-    // Блокировка выхода во всех вкладках, пока нет ответа
+    // Блокировка выхода до ответа
     window.addEventListener("beforeunload", (e) => {
       if (localStorage.getItem(ANSWER_KEY) !== "true") {
         e.preventDefault();
@@ -238,25 +222,37 @@
       }
     });
 
-    // Навигация по вкладкам (делегирование)
+    // Навигация по вкладкам
     const tabsBar = document.getElementById("tabs");
     const buttons = Array.from(tabsBar.querySelectorAll(".tab-btn"));
     const panes   = Array.from(document.querySelectorAll(".tab-content"));
+    const hamburger = document.getElementById("hamburger");
 
     function showTab(id){
       panes.forEach(p => p.classList.toggle("show", p.id === id));
       buttons.forEach(b => b.classList.toggle("active", b.dataset.tab === id));
     }
+
+    // Делегирование кликов по вкладкам
     tabsBar.addEventListener("click", (e) => {
       const btn = e.target.closest(".tab-btn");
       if (!btn) return;
       showTab(btn.dataset.tab);
+      // Закрываем мобильное меню после выбора пункта
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        tabsBar.classList.remove("open");
+      }
     });
 
-    // Инициализация активной вкладки (на случай перезагрузки)
+    // Инициализация активной вкладки
     document.addEventListener("DOMContentLoaded", () => {
       const active = buttons.find(b => b.classList.contains("active")) || buttons[0];
       showTab(active.dataset.tab);
+    });
+
+    // Гамбургер: открыть/закрыть меню
+    hamburger.addEventListener("click", () => {
+      tabsBar.classList.toggle("open");
     });
 
     // Обработка Опрос по согласию
@@ -275,7 +271,6 @@
       localStorage.setItem(ANSWER_KEY, "true");
 
       if (choice === "yes") {
-        // Перенаправление в WhatsApp
         window.location.href = "https://chat.whatsapp.com/B5qS0C1AihQKMeVerSVM27?mode=hqrt1";
       } else {
         alert("Спасибо за ответ! Мы будем скучать 😔");
@@ -284,7 +279,7 @@
       console.log("Гость:", name, "Ответ:", choice);
     });
 
-    // Синхронизация между вкладками (если ответили в другой)
+    // Синхронизация между вкладками
     window.addEventListener("storage", (e) => {
       if (e.key === ANSWER_KEY && e.newValue === "true") {
         console.log("Опрос по согласию получен в другой вкладке — блокировка снята.");
