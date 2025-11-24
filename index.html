@@ -2,308 +2,250 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Свадебное приглашение — Владислав и Ирина</title>
 <style>
-  :root{
-    --primary:#7c4dff; --secondary:#b388ff; --card:#ffffff;
-    --text:#2b2b2b; --muted:#777;
-  }
+:root{
+  --brown:#8B5E3C; --brown-dark:#6f4a2f; --sand:#D2B48C;
+  --beige:#F7F3ED; --white:#ffffff; --text:#3A2B2B;
+  --header-h:64px; --shadow:0 10px 24px rgba(0,0,0,.08);
+}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;
+  color:var(--text);background:linear-gradient(180deg,#FBF8F3 0%,#FDFBF7 50%,#FFFFFF 100%);}
 
-  /* Фон: градиент + встроенный бесшовный SVG-паттерн */
-  body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;
-    background:
-      linear-gradient(135deg,#f7e8ff 0%,#fff 100%),
-      url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'>\
-  <rect width='240' height='240' fill='none'/>\
-  <!-- мягкие акварельные пятна -->\
-  <circle cx='60' cy='60' r='52' fill='rgba(255,235,240,0.6)'/>\
-  <circle cx='170' cy='80' r='44' fill='rgba(255,245,230,0.55)'/>\
-  <circle cx='120' cy='170' r='58' fill='rgba(235,245,255,0.55)'/>\
-  <!-- стилизованные пионы -->\
-  <g transform='translate(24,28)'>\
-    <path d='M40,26c18,0,32,14,32,32s-14,32-32,32S8,76,8,58 22,26,40,26z' fill='rgba(255,210,220,0.75)'/>\
-    <path d='M40,34c14,0,24,10,24,24s-10,24-24,24S16,72,16,58 26,34,40,34z' fill='rgba(255,185,195,0.65)'/>\
-    <circle cx='40' cy='58' r='6' fill='rgba(220,140,140,0.8)'/>\
-  </g>\
-  <g transform='translate(150,28)'>\
-    <path d='M40,26c18,0,32,14,32,32s-14,32-32,32S8,76,8,58 22,26,40,26z' fill='rgba(255,230,210,0.75)'/>\
-    <path d='M40,34c14,0,24,10,24,24s-10,24-24,24S16,72,16,58 26,34,40,34z' fill='rgba(255,205,175,0.65)'/>\
-    <circle cx='40' cy='58' r='6' fill='rgba(210,150,120,0.8)'/>\
-  </g>\
-  <!-- листья -->\
-  <path d='M30,140c24,-10,28,14,52,8c-10,12,-40,18,-52,8z' fill='rgba(175,200,180,0.6)'/>\
-  <path d='M180,150c-22,-12,-30,12,-52,6c12,12,42,18,52,6z' fill='rgba(160,190,175,0.55)'/>\
-</svg>");
-    background-repeat: no-repeat, repeat;
-    background-size: cover, 420px;
-    background-attachment: fixed;
-    color:var(--text);
-  }
-  /* Если позже захочешь использовать свой файл: раскомментируй эту строку и закомментируй data URI выше */
-  /* body{ background: linear-gradient(135deg,#f7e8ff 0%,#fff 100%), url("img/pattern-peonies.png"); background-repeat:no-repeat,repeat; background-size:cover,420px; background-attachment:fixed; } */
+/* HERO */
+.hero{min-height:86vh;display:flex;align-items:center;justify-content:center;padding:24px 16px 48px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.65),rgba(255,255,255,0.80)),url('img/hero-couple.jpg') center/cover no-repeat;}
+.hero.no-photo{background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.9));}
+.hero-box{background:rgba(255,255,255,0.88);border:1px solid #eadfcf;border-radius:20px;padding:32px 24px;text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,0.12);max-width:760px;width:100%;}
+.hero h1{margin:0 0 8px;font-size:34px;color:var(--brown);}
+.hero .subtitle{margin:0 0 18px;font-size:18px;color:var(--brown-dark);}
+.calendar{display:inline-grid;grid-template-columns:auto auto auto;align-items:center;gap:12px;border:3px solid var(--brown);
+  border-radius:14px;padding:16px 20px;background:var(--beige);margin:0 auto 16px;}
+.calendar .month{font-size:20px;font-weight:700;color:var(--brown);}
+.calendar .day{font-size:44px;font-weight:800;color:var(--brown-dark);}
+.calendar .year{font-size:18px;font-weight:600;color:var(--brown);}
+#countdown{margin-top:8px;font-size:20px;font-weight:700;color:var(--brown-dark);}
+#countdown span{display:inline-block;min-width:70px;}
+.scroll-down{display:inline-block;margin-top:18px;font-size:22px;color:var(--brown);text-decoration:none;transition:transform .2s ease;}
+.scroll-down:hover{transform:translateY(4px);}
 
-  /* Навигация */
-  .navbar{
-    position:fixed; top:0; left:0; right:0;
-    backdrop-filter:blur(10px);
-    background:rgba(255,255,255,0.9);
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    z-index:1000;
-  }
-  .nav-inner{
-    position:relative; max-width:980px; margin:0 auto;
-    padding:10px 16px; display:flex; align-items:center; gap:12px;
-  }
-  .brand{ font-weight:700; color:var(--primary); margin-right:auto; }
-  .tabs{ display:flex; gap:8px; }
-  .tab-btn{
-    border:none; background:transparent; color:var(--text);
-    padding:8px 14px; border-radius:10px; cursor:pointer;
-    transition:all .2s ease;
-  }
-  .tab-btn:hover{ background:#efecff; }
-  .tab-btn.active{
-    background:var(--primary); color:#fff; box-shadow:0 6px 14px rgba(124,77,255,.25);
-  }
-  .hamburger{ display:none; font-size:24px; background:none; border:none; cursor:pointer; color:var(--primary); }
+/* Навигация */
+.navbar{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--sand);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);z-index:1000;}
+.nav-inner{max-width:980px;margin:0 auto;height:100%;display:flex;align-items:center;gap:12px;padding:0 16px;}
+.brand{font-weight:700;color:var(--white);margin-right:auto;}
+.tabs{display:flex;gap:8px;}
+.tab-link{text-decoration:none;color:var(--white);padding:8px 12px;border-radius:10px;transition:all .2s ease;}
+.tab-link:hover{background:var(--brown);color:#fff;}
+.hamburger{display:none;font-size:22px;background:none;border:none;cursor:pointer;color:var(--white);}
+@media(max-width:640px){.hamburger{display:block;margin-left:auto;}
+  .tabs{position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--white);
+    border-radius:0 0 12px 12px;box-shadow:0 12px 24px rgba(0,0,0,0.12);max-height:0;overflow:hidden;transition:max-height .28s ease;}
+  .tabs.open{max-height:320px;}
+  .tab-link{padding:12px 16px;color:var(--brown);}
+}
 
-  /* Контент */
-  .wrap{ margin-top:84px; padding:24px; display:flex; justify-content:center; }
-  .card{
-    width:100%; max-width:900px; background:var(--card);
-    border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.08);
-    padding:28px;
-  }
-  .tab-content{ display:none; opacity:0; transform:translateY(10px); }
-  .tab-content.show{ display:block; animation:fadeIn .35s ease forwards; }
-  @keyframes fadeIn{ to{ opacity:1; transform:translateY(0); } }
-
-  h1{ text-align:center; font-size:28px; color:var(--primary); margin:0 0 8px; }
-  h2{ text-align:center; font-size:22px; color:#5b2ca3; margin:0 0 14px; }
-  .date{ text-align:center; font-weight:600; margin:10px 0 16px; }
-  .text{ text-align:center; line-height:1.65; max-width:780px; margin:0 auto; }
-
-  /* Фото на главной */
-  .hero-img.small{
-    display:block; margin:16px auto 0;
-    border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.10);
-    max-width:60%;
-  }
-
-  /* Карта и фото площадки */
-  #map iframe{ width:100%; height:340px; display:block; border-radius:12px; }
-  .map-buttons{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px; }
-  .map-link{
-    text-decoration:none; padding:10px 14px; border-radius:12px;
-    background:#efecff; color:#3a2b55; transition:all .2s ease;
-  }
-  .map-link:hover{ background:var(--secondary); color:#fff; }
-  .place-photos{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:12px; margin-top:14px; max-width:900px; margin-left:auto; margin-right:auto;
-  }
-  .place-photos img{
-    width:100%; border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.08); object-fit:cover;
-  }
-
-  /* Формы */
-  .form-row{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-  .input,.select{ padding:10px 12px; border-radius:10px; border:1px solid #ddd; min-width:240px; background:#fff; }
-  .btn{ padding:10px 16px; border-radius:10px; border:none; cursor:pointer; background:var(--primary); color:#fff; }
-  .note{ text-align:center; color:var(--muted); margin-top:8px; }
-
-  /* Спонсоры */
-  .sponsors-grid{
-    display:grid; grid-template-columns:repeat(4,1fr);
-    gap:16px; margin:20px 0;
-  }
-  .sponsors-grid img{
-    width:100%; aspect-ratio:1/1; object-fit:cover;
-    border-radius:12px; box-shadow:0 6px 14px rgba(0,0,0,.1);
-  }
-  .thanks{ text-align:center; line-height:1.7; color:#444; margin-top:12px; }
-
-  /* Мобильный режим */
-  @media (max-width:640px){
-    .hamburger{ display:block; margin-left:auto; }
-    .tabs{
-      position:absolute; top:100%; left:0; right:0;
-      flex-direction:column; background:#fff; box-shadow:0 8px 20px rgba(0,0,0,.15);
-      border-radius:0 0 12px 12px; max-height:0; overflow:hidden; transition:max-height .3s ease;
-    }
-    .tabs.open{ max-height:340px; }
-    .tab-btn{ width:100%; text-align:left; padding:12px 16px; }
-    .hero-img.small{ max-width:80%; }
-    #map iframe{ height:280px; }
-    .sponsors-grid{ grid-template-columns:repeat(2,1fr); }
-  }
+/* Секции */
+main{padding-top:12px;}
+section{padding:64px 20px;max-width:980px;margin:0 auto;background:rgba(255,255,255,0.92);border-radius:18px;box-shadow:var(--shadow);
+  margin-bottom:24px;scroll-margin-top:calc(var(--header-h)+12px);}
+h1{text-align:center;color:var(--brown);}
+h2{text-align:center;color:var(--brown-dark);}
+.date{text-align:center;font-weight:600;color:#5a4638;margin:10px 0 18px;}
+p.lead{text-align:center;line-height:1.7;max-width:760px;margin:0 auto;color:#4a3a2f;}
+.hero-img{display:block;margin:18px auto 0;width:100%;max-width:720px;border-radius:14px;box-shadow:var(--shadow);}
+iframe.map{width:100%;height:340px;border:0;border-radius:14px;box-shadow:var(--shadow);}
+.place-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;}
+.place-photos img{width:100%;height:180px;border-radius:12px;object-fit:cover;box-shadow:0 8px 18px rgba(0,0,0,.08);}
+.map-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px;}
+.map-link{text-decoration:none;padding:10px 14px;border-radius:12px;background:var(--sand);color:#fff;}
+.map-link:hover{background:#9b6d46;}
+.form-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.input,.select{padding:10px 12px;border-radius:10px;border:1px solid #d8ccb8;min-width:240px;background:#fff;}
+.btn{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;background:var(--brown);color:#fff;}
+.btn:hover{transform:translateY(-1px);}
+.note{text-align:center;color:#6f5a49;margin-top:8px;}
+.sponsors-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:8px 0 16px;}
+.sponsors-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,.1);}
+.thanks{text-align:center;line-height:1.7;color:#4a3a2f;}
+.footer{text-align:center;padding:20px;background:var(--sand);color:#fff;border-top:2px solid var(--brown);}
 </style>
 </head>
 <body>
-  <!-- Навигация -->
-  <nav class="navbar" aria-label="Навигация">
-    <div class="nav-inner">
-      <div class="brand">Владислав & Ирина</div>
-      <button class="hamburger" id="hamburger" aria-label="Меню">&#9776;</button>
-      <div class="tabs" id="tabs" aria-label="Вкладки">
-        <button class="tab-btn active" data-tab="invite">Приглашение</button>
-        <button class="tab-btn" data-tab="contacts">Контакты</button>
-        <button class="tab-btn" data-tab="schedule">Программа</button>
-        <button class="tab-btn" data-tab="map">Карта</button>
-        <button class="tab-btn" data-tab="rsvp">RSVP</button>
-        <button class="tab-btn" data-tab="sponsors">Спонсоры</button>
-      </div>
+
+<header class="hero" id="hero">
+  <div class="hero-box">
+    <h1>Владислав & Ирина</h1>
+    <p class="subtitle">Наша свадьба состоится</p>
+    <div class="calendar"><div class="month">Июнь</div><div class="day">07</div><div class="year">2026</div></div>
+    <div id="countdown"></div>
+    <a href="#invite" class="scroll-down">↓ Перейти к приглашению</a>
+  </div>
+</header>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="brand">Владислав & Ирина</div>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+    <div class="tabs" id="tabs">
+      <a class="tab-link" href="#invite">Приглашение</a>
+      <a class="tab-link" href="#contacts">Контакты</a>
+      <a class="tab-link" href="#schedule">Программа</a>
+      <a class="tab-link" href="#map">Карта</a>
+      <a class="tab-link" href="#rsvp">RSVP</a>
+      <a class="tab-link" href="#sponsors">Спонсоры</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Контент -->
-  <main class="wrap">
-    <section class="card" id="card">
-      <!-- Приглашение -->
-      <div id="invite" class="tab-content show" role="region" aria-label="Приглашение">
-        <h1>Приглашение на свадьбу 💍</h1>
-        <h2>Владислав и Ирина</h2>
-        <div class="date">7 июня 2025 — Владивосток, шатёр «Орион»</div>
-        <p class="text">
-          Дорогие друзья! Мы с радостью приглашаем вас на нашу свадьбу в шатре «Орион» в городе Владивосток.
-          Этот день станет началом новой главы нашей жизни, и мы будем счастливы разделить его с вами!
-        </p>
-        <img class="hero-img small" src="img/fRXqtpqwDT3nsj8i3vhcV.jpeg" alt="Фото пары"/>
-      </div>
+<main>
+  <!-- Приглашение -->
+  <section id="invite" role="region" aria-label="Приглашение">
+    <h1>Приглашение на свадьбу 💍</h1>
+    <h2>Владислав и Ирина</h2>
+    <div class="date">7 июня 2026 — Владивосток, шатёр «Орион»</div>
+    <p class="lead">
+      Дорогие друзья! Мы с радостью приглашаем вас на нашу свадьбу в шатре «Орион» в городе Владивосток.
+      Этот день станет началом новой главы нашей жизни, и мы будем счастливы разделить его с вами!
+    </p>
+    <img class="hero-img" src="img/fRXqtpqwDT3nsj8i3vhcV.jpeg" alt="Фото пары"/>
+  </section>
 
-      <!-- Контакты -->
-      <div id="contacts" class="tab-content" role="region" aria-label="Контакты">
-        <h2>Контакты</h2>
-        <p style="text-align:center;"><strong>Владислав:</strong> 📞 +7 963 839 47 72</p>
-        <p style="text-align:center;"><strong>Ирина:</strong> 📞 +7 984 199 29 40</p>
-      </div>
+  <!-- Контакты -->
+  <section id="contacts" role="region" aria-label="Контакты">
+    <h2>Контакты</h2>
+    <p style="text-align:center;"><strong>Владислав:</strong> 📞 +7 963 839 47 72</p>
+    <p style="text-align:center;"><strong>Ирина:</strong> 📞 +7 984 199 29 40</p>
+    <p style="text-align:center;"><strong>По вопросам организации мероприятия заранее обращайтесь к нашему ведущему:</strong> 
+    <p style="text-align:center;"><strong>Иван Захаров:</strong> 📞 +7 984 156 33 02</p>
+  </section>
 
-      <!-- Программа -->
-      <div id="schedule" class="tab-content" role="region" aria-label="Программа">
-        <h2>Программа свадьбы</h2>
-        <ul>
-          <li><strong>15:00 — Сбор гостей:</strong> приветственные напитки, фотозона, рассадка.</li>
-          <li><strong>16:00 — Церемония:</strong> торжественная клятва, обмен кольцами, общая фотография.</li>
-          <li><strong>17:00 — Welcome‑time:</strong> лёгкие закуски, знакомство гостей, интерактивы ведущего.</li>
-          <li><strong>18:00 — Банкет:</strong> главное меню, тосты, выступления друзей и родителей.</li>
-          <li><strong>19:30 — Первый танец:</strong> выход пары и танец, открытие танцпола.</li>
-          <li><strong>20:00 — Игры и конкурсы:</strong> активности, розыгрыши, номера.</li>
-          <li><strong>21:30 — Торт:</strong> подача торта, десерты, кофе‑брейк.</li>
-          <li><strong>22:00 — Танцы и свободная программа:</strong> диджей‑сеты, фото и общение.</li>
-        </ul>
-      </div>
+  <!-- Программа -->
+  <section id="schedule" role="region" aria-label="Программа">
+    <h2>Программа свадьбы</h2>
+    <ul>
+      <li><strong>15:00 — Сбор гостей:</strong> приветственные напитки, фотозона, рассадка.</li>
+      <li><strong>16:00 — Церемония:</strong> клятва, обмен кольцами, общая фотография.</li>
+      <li><strong>17:00 — Welcome‑time:</strong> лёгкие закуски, знакомство гостей, интерактивы ведущего.</li>
+      <li><strong>18:00 — Банкет:</strong> меню, тосты, выступления друзей и родителей.</li>
+      <li><strong>19:30 — Первый танец:</strong> выход пары, открытие танцпола.</li>
+      <li><strong>20:00 — Игры и конкурсы:</strong> активности, розыгрыши, номера.</li>
+      <li><strong>21:30 — Торт:</strong> подача торта, десерты, кофе‑брейк.</li>
+      <li><strong>22:00 — Танцы и свободная программа:</strong> диджей‑сеты, фото и общение.</li>
+    </ul>
+  </section>
 
-      <!-- Карта -->
-      <div id="map" class="tab-content" role="region" aria-label="Карта">
-        <h2>Как добраться</h2>
-        <iframe
-          title="Яндекс.Карты — Владивосток, ул. Максимовича, 310"
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&ll=131.922,43.183&z=16&text=Владивосток%2C%20ул.%20Максимовича%2C%20310"
-          frameborder="0" allowfullscreen></iframe>
-        <div class="map-buttons">
-          <a class="map-link" href="https://yandex.ru/maps/?text=Владивосток%2C%20ул.%20Максимовича%2C%20310" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
-          <a class="map-link" href="https://2gis.ru/vladivostok/search/Владивосток%20Максимовича%20310" target="_blank" rel="noopener">Открыть в 2GIS</a>
-        </div>
-        <div class="place-photos">
-          <img src="img/photo1.jpg" alt="Фото площадки 1"/>
-          <img src="img/photo2.jpg" alt="Фото площадки 2"/>
-        </div>
-      </div>
+  <!-- Карта -->
+  <section id="map" role="region" aria-label="Карта">
+    <h2>Как добраться</h2>
+    <iframe class="map"
+      title="Яндекс.Карты — Владивосток, ул. Максимовича, 310"
+      src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&ll=131.922,43.183&z=16&text=Владивосток%2C%20ул.%20Максимовича%2C%20310"
+      allowfullscreen>
+    </iframe>
+    <div class="map-buttons">
+      <a class="map-link" href="https://yandex.ru/maps/?text=Владивосток%2C%20ул.%20Максимовича%2C%20310" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+      <a class="map-link" href="https://2gis.ru/vladivostok/search/Владивосток%20Максимовича%20310" target="_blank" rel="noopener">Открыть в 2GIS</a>
+    </div>
+    <div class="place-photos">
+      <img src="img/photo1.jpg" alt="Фото площадки 1"/>
+      <img src="img/photo2.jpg" alt="Фото площадки 2"/>
+    </div>
+  </section>
 
-      <!-- RSVP -->
-      <div id="rsvp" class="tab-content" role="region" aria-label="RSVP">
-        <h2>Ответ на приглашение</h2>
-        <form id="rsvpForm" autocomplete="on">
-          <div class="form-row">
-            <input class="input" type="text" id="guestName" placeholder="Ваше имя" required/>
-            <select class="select" id="guestChoice" aria-label="Ваш ответ">
-              <option value="yes">Приду 🎉</option>
-              <option value="no">Не смогу 😔</option>
-            </select>
-            <button class="btn" type="submit">Отправить</button>
-          </div>
-        </form>
-        <p class="note">Пожалуйста, ответьте на приглашение — иначе сайт попросит остаться.</p>
+  <!-- RSVP -->
+  <section id="rsvp" role="region" aria-label="RSVP">
+    <h2>Ответ на приглашение</h2>
+    <form id="rsvpForm">
+      <div class="form-row">
+        <input class="input" type="text" id="guestName" placeholder="Ваше имя" required/>
+        <select class="select" id="guestChoice">
+          <option value="yes">Приду 🎉</option>
+          <option value="no">Не смогу 😔</option>
+        </select>
+        <button class="btn" type="submit">Отправить</button>
       </div>
+    </form>
+    <p class="note">Спасибо за ваш ответ — нам важно планировать праздник заранее.</p>
+  </section>
 
-      <!-- Спонсоры -->
-      <div id="sponsors" class="tab-content" role="region" aria-label="Спонсоры">
-        <h2>Спонсоры</h2>
-        <div class="sponsors-grid">
-          <img src="img/sponsor1.jpg" alt="Мама Влада"/>
-          <img src="img/sponsor2.jpg" alt="Папа Влада"/>
-          <img src="img/sponsor3.jpg" alt="Мама Иры"/>
-          <img src="img/sponsor4.jpg" alt="Папа Иры"/>
-        </div>
-        <p class="thanks">
-          С глубокой благодарностью нашим родителям — маме и папе Влада, а также маме и папе Иры — за любовь, поддержку и участие в нашей жизни. Благодаря вам этот день стал возможен и наполнен теплом.
-        </p>
-      </div>
-    </section>
-  </main>
+  <!-- Спонсоры -->
+  <section id="sponsors" role="region" aria-label="Спонсоры">
+    <h2>Спонсоры</h2>
+    <div class="sponsors-grid">
+      <img src="img/sponsor1.jpg" alt="Мама Влада"/>
+      <img src="img/sponsor2.jpg" alt="Папа Влада"/>
+      <img src="img/sponsor3.jpg" alt="Мама Иры"/>
+      <img src="img/sponsor4.jpg" alt="Папа Иры"/>
+    </div>
+    <p class="thanks">
+      С глубокой благодарностью нашим родителям — маме и папе Влада, а также маме и папе Иры — за любовь, поддержку и участие в нашей жизни. Благодаря вам этот день стал возможен и наполнен теплом.
+    </p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>С любовью, Владислав и Ирина ❤️</p>
+  <p>© 2026 Wedding Invitation</p>
+</footer>
 
 <script>
-  // Блокировка выхода до RSVP
-  const ANSWER_KEY = "rsvp_answered";
-  if (localStorage.getItem(ANSWER_KEY) === null) localStorage.setItem(ANSWER_KEY, "false");
-  window.addEventListener("beforeunload", (e) => {
-    if (localStorage.getItem(ANSWER_KEY) !== "true") {
-      e.preventDefault();
-      e.returnValue = "Пожалуйста, ответьте на приглашение перед выходом.";
-    }
-  });
-
-  // Навигация
-  const tabsBar = document.getElementById("tabs");
-  const buttons = Array.from(tabsBar.querySelectorAll(".tab-btn"));
-  const panes   = Array.from(document.querySelectorAll(".tab-content"));
-  const hamburger = document.getElementById("hamburger");
-
-  function showTab(id){
-    panes.forEach(p => p.classList.toggle("show", p.id === id));
-    buttons.forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+  // Мобильное меню
+  const hamburger = document.getElementById('hamburger');
+  const tabs = document.getElementById('tabs');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => tabs.classList.toggle('open'));
   }
-
-  tabsBar.addEventListener("click", (e) => {
-    const btn = e.target.closest(".tab-btn");
-    if (!btn) return;
-    showTab(btn.dataset.tab);
-    if (window.matchMedia("(max-width: 640px)").matches) tabsBar.classList.remove("open");
+  tabs.addEventListener('click', (e) => {
+    const link = e.target.closest('a.tab-link');
+    if (!link) return;
+    if (window.matchMedia('(max-width: 640px)').matches) tabs.classList.remove('open');
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const active = buttons.find(b => b.classList.contains("active")) || buttons[0];
-    showTab(active.dataset.tab);
+  // Таймер: надёжный локальный формат (июнь = 5)
+  const countdownEl = document.getElementById('countdown');
+  const weddingDate = new Date(2026, 5, 7, 15, 0, 0); // 07.06.2026 15:00
+  function pad(n){ return n.toString().padStart(2,'0'); }
+  function updateCountdown(){
+    const now = new Date();
+    const diff = weddingDate.getTime() - now.getTime();
+    if (diff <= 0) {
+      countdownEl.textContent = "Свадьба уже началась 🎉";
+      return;
+    }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    countdownEl.innerHTML =
+      `<span>${days} дн</span> <span>${pad(hours)} ч</span> <span>${pad(minutes)} мин</span> <span>${pad(seconds)} сек</span>`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   });
 
-  hamburger.addEventListener("click", () => {
-    tabsBar.classList.toggle("open");
-  });
+  // Если фото пары отсутствует — включить безопасный фон
+  (function ensureHeroBackground(){
+    const hero = document.querySelector('.hero');
+    const testImg = new Image();
+    testImg.src = 'img/hero-couple.jpg';
+    testImg.onload = () => { /* фото найдено */ };
+    testImg.onerror = () => { hero.classList.add('no-photo'); };
+  })();
 
-  // RSVP
-  const form = document.getElementById("rsvpForm");
-  form.addEventListener("submit", (ev) => {
+  // RSVP: базовая обработка
+  document.getElementById('rsvpForm').addEventListener('submit', (ev) => {
     ev.preventDefault();
-    const name = document.getElementById("guestName").value.trim();
-    const choice = document.getElementById("guestChoice").value;
-    if (!name){ alert("Пожалуйста, укажите ваше имя."); return; }
-    localStorage.setItem(ANSWER_KEY, "true");
-    if (choice === "yes") {
-      window.location.href = "https://chat.whatsapp.com/B5qS0C1AihQKMeVerSVM27?mode=hqrt1";
-    } else {
-      alert("Спасибо за ответ! Мы будем скучать 😔");
-    }
-  });
-
-  // Синхронизация между вкладками
-  window.addEventListener("storage", (e) => {
-    if (e.key === ANSWER_KEY && e.newValue === "true") {
-      console.log("RSVP получен в другой вкладке — блокировка снята.");
-    }
+    const name = document.getElementById('guestName').value.trim();
+    const choice = document.getElementById('guestChoice').value;
+    if (!name) { alert('Пожалуйста, укажите ваше имя.'); return; }
+    alert(choice === 'yes'
+      ? `Спасибо, ${name}! Мы рады, что вы будете с нами 🎉`
+      : `Спасибо, ${name}. Будем скучать 😔`);
   });
 </script>
 </body>
