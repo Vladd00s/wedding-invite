@@ -9,6 +9,15 @@
   --brown:#8B5E3C; --brown-dark:#6f4a2f; --sand:#D2B48C;
   --beige:#F7F3ED; --white:#ffffff; --text:#3A2B2B;
   --header-h:64px; --shadow:0 10px 24px rgba(0,0,0,.08);
+   /* Картинки в блоке dresscode показываются полностью */
+   #dresscode .place-photos img {
+   width: 100%;
+   height: auto;          /* высота подстраивается автоматически */
+   object-fit: contain;   /* картинка полностью помещается */
+   border-radius: 12px;
+   box-shadow: 0 8px 18px rgba(0,0,0,.08);
+   background: #fff;      /* фон для аккуратного вида */
+   padding: 6px;          /* небольшой отступ вокруг */}
 }
 html{scroll-behavior:smooth;}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;
@@ -111,7 +120,7 @@ iframe.map{width:100%;height:340px;border:0;border-radius:14px;box-shadow:var(--
     <div class="tabs" id="tabs">
       <a class="tab-link" href="#invite">Приглашение</a>
       <a class="tab-link" href="#rules">Правила</a>
-     <a class="tab-link" href="#dresscode">Дресс‑код</a>
+      <a class="tab-link" href="#dresscode">Дресс‑код</a>
       <a class="tab-link" href="#contacts">Контакты</a>
       <a class="tab-link" href="#schedule">Программа</a>
       <a class="tab-link" href="#map">Карта</a>
